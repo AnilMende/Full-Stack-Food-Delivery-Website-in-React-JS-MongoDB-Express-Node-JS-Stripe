@@ -4,7 +4,7 @@ import { assets } from "../../assets/assets";
 
 const AppDownloads = () => {
     return(
-        <AppDownload>
+        <AppDownload id="app-download">
             <p>For Better Experience Download <br /> Tomato App</p>
             <div className="app-download-platforms">
                 <img src={assets.play_store} />

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { assets } from "../../assets/assets";
+import {Link} from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({setShowLogin}) => {
 
     const [menu, setMenu] = useState("Home");
     
@@ -11,10 +12,10 @@ const Navbar = () => {
             <img src={assets.logo} alt="" className="logo" />
 
             <ul className="navbar-menu">
-                <li onClick={() => setMenu("Home")} className={menu === "Home" ? "active":""}>Home</li>
-                <li onClick={() => setMenu("Menu")} className={menu === "Menu" ? "active":""}>Menu</li>
-                <li onClick={() => setMenu("Mobile-App")} className={menu === "Mobile-App" ? "active":""}>Mobile-App</li>
-                <li onClick={() => setMenu("Contact Us")} className={menu === "Contact Us" ? "active": ""}>Contact Us</li>
+                <Link to="/" onClick={() => setMenu("Home")} className={menu === "Home" ? "active":""}>Home</Link>
+                <a href="#explore-menu" onClick={() => setMenu("Menu")} className={menu === "Menu" ? "active":""}>Menu</a>
+                <a href="#app-download" onClick={() => setMenu("Mobile-App")} className={menu === "Mobile-App" ? "active":""}>Mobile-App</a>
+                <a href="#footer" onClick={() => setMenu("Contact Us")} className={menu === "Contact Us" ? "active": ""}>Contact Us</a>
             </ul>
 
             <div className="navbar-right">
@@ -25,7 +26,7 @@ const Navbar = () => {
                     <div className="dot"></div>
                 </div>
 
-                <button>Sign In</button>
+                <button onClick={() => setShowLogin(true)}>Sign In</button>
             </div>
         </NavbarContainer>
     )
@@ -93,5 +94,50 @@ const NavbarContainer = styled.div`
         top: -8px;
         right: -8px;
     }
-    
+
+    /* Making responsive */
+    @media (max-width:1050px){
+        .logo{
+            width: 140px;
+        }
+        .navbar-menu{
+            gap: 20px;
+            font-size: 17px;
+        }
+        .navbar-right{
+            gap: 30px;
+        }
+        .navbar-right img{
+            width: 22px;
+        }
+        .navbar-right button{
+            padding: 8px 25px;
+        }
+    }
+
+    @media (max-width:900px){
+        .logo{
+            width: 120px;
+        }
+        .navbar-menu{
+            gap: 15px;
+            font-size: 16px;
+        }
+        .navbar-right{
+            gap: 20px;
+        }
+        .navbar-right img{
+            width: 20px;
+        }
+        .navbar-right button{
+            padding: 7px 20px;
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width:750px) {
+        .navbar-menu{
+            display: none;
+        }
+    }
 `;

@@ -90,4 +90,12 @@ const ExploreMenuContainer = styled.div`
         border-radius: 50%;
         padding: 3px;
       }
+
+      /* making responsive */
+      @media (max-width:1050px) {
+        .explore-menu-text{
+          max-width: 100%;
+          font-size: 14px;
+        }
+      }
 `;

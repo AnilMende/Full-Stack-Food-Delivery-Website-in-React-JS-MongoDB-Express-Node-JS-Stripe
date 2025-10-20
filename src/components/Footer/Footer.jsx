@@ -4,7 +4,7 @@ import { assets } from "../../assets/assets";
 
 const Footer = () => {
     return(
-        <FooterContainer>
+        <FooterContainer id="footer">
 
             <div className="footer-content">
 
@@ -92,5 +92,17 @@ const FooterContainer = styled.div`
         margin: 20px 0px;
         background-color: gray;
         border: none;
+      }
+
+      @media (max-width:750px){
+        .footer-content{
+          display: flex;
+          flex-direction: column;
+          gap: 35px;
+        }
+
+        .footer-copy-right{
+          text-align: center;
+        }
       }
 `;
