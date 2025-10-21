@@ -30,16 +30,35 @@ const StoreContextProvider = (props) => {
         setCartItems((prev) => ({...prev,[itemId]:prev[itemId] - 1}));
     }
 
-    useEffect(() => {
-         console.log(cartItems);
-    },[cartItems])
+    // to check the cartItems we are using the useEffect
+    // useEffect(() => {
+    //      console.log(cartItems);
+    // },[cartItems])
+
+    // To caluculate the total cart value
+    const getTotalCartAmount = () => {
+        let totalAmount = 0;
+        for(const item in cartItems){
+            // if the count of particular item is greater than 0 then we can add
+            if(cartItems[item] > 0){
+                // first we need the price of that particular item, using the food_list
+                // by using this we can get complete object of that particular item
+                // so we can access properties of the object
+                let itemInfo = food_list.find((product) => product._id === item);
+                totalAmount += itemInfo.price * cartItems[item];
+                // cartItems[item] to get the quantity
+            }
+        }
+        return totalAmount;
+    }
 
     const contextValue = {
         food_list,
         cartItems,
         setCartItems,
         addToCart,
-        removeFromCart
+        removeFromCart,
+        getTotalCartAmount
     }
     
     return(

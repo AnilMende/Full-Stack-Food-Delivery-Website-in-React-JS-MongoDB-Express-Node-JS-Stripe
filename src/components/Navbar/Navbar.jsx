@@ -1,29 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from 'styled-components';
 import { assets } from "../../assets/assets";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { StoreContext } from "../../context/StoreContext";
 
-const Navbar = ({setShowLogin}) => {
+const Navbar = ({ setShowLogin }) => {
 
     const [menu, setMenu] = useState("Home");
     
-    return(
+    const {getTotalCartAmount} = useContext(StoreContext);
+
+    return (
         <NavbarContainer id="navbar">
-            <img src={assets.logo} alt="" className="logo" />
+            {/* If we click on the logo we get the home by using the route / */}
+            <Link to="/">
+                <img src={assets.logo} className="logo" />
+            </Link>
+
 
             <ul className="navbar-menu">
-                <Link to="/" onClick={() => setMenu("Home")} className={menu === "Home" ? "active":""}>Home</Link>
-                <a href="#explore-menu" onClick={() => setMenu("Menu")} className={menu === "Menu" ? "active":""}>Menu</a>
-                <a href="#app-download" onClick={() => setMenu("Mobile-App")} className={menu === "Mobile-App" ? "active":""}>Mobile-App</a>
-                <a href="#footer" onClick={() => setMenu("Contact Us")} className={menu === "Contact Us" ? "active": ""}>Contact Us</a>
+                <Link to="/" onClick={() => setMenu("Home")} className={menu === "Home" ? "active" : ""}>Home</Link>
+                <a href="#explore-menu" onClick={() => setMenu("Menu")} className={menu === "Menu" ? "active" : ""}>Menu</a>
+                <a href="#app-download" onClick={() => setMenu("Mobile-App")} className={menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
+                <a href="#footer" onClick={() => setMenu("Contact Us")} className={menu === "Contact Us" ? "active" : ""}>Contact Us</a>
             </ul>
 
             <div className="navbar-right">
                 <img src={assets.search_icon} alt="" />
 
                 <div className="navbar-search-icon">
-                    <img src={assets.basket_icon} alt="" />
-                    <div className="dot"></div>
+                    {/* we are adding the route /cart to the basket icon on clicking of the img we
+                    get the cart page */}
+                    <Link to="/cart">
+                        <img src={assets.basket_icon} alt="" />
+                    </Link>
+                    {/* if the totalCartAmount is greater than 0 then we need to show the red dot on the basket icon 
+                      these helps us with knowing that if the basket containts items or not */}
+                    <div className={getTotalCartAmount() === 0 ? "":"dot"}></div>
                 </div>
 
                 <button onClick={() => setShowLogin(true)}>Sign In</button>
